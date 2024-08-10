@@ -24,7 +24,7 @@ function DropdownOptions({children}) {
 
 function DropdownOption({children, updateSelection}) {
     return(
-        <div onClick={updateSelection}>{children}</div>
+        <div onClick={updateSelection}>{children.name}</div>
     )
 }
 
@@ -56,7 +56,7 @@ export default function Dropdown() {
             <DropdownContext.Provider value={isActive}>
                 <DropdownOptions>
                     {locations? locations.map((location) => 
-                        (<DropdownOption updateSelection={updateSelection}>{location.name}</DropdownOption>)
+                        (<DropdownOption updateSelection={updateSelection}>{location}</DropdownOption>)
                     ): (<DropdownOption updateSelection={updateSelection}>no locations</DropdownOption>)}
                 </DropdownOptions>
             </DropdownContext.Provider>
