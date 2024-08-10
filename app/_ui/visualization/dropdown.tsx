@@ -50,10 +50,10 @@ export default function Dropdown() {
             <DropdownButton handleClick={handleClick}>{currentSelection.name}</DropdownButton>
             <DropdownContext.Provider value={isActive}>
                 <DropdownOptions>
-                        <DropdownOption> yuppers 
-
-                        </DropdownOption>
-                    </DropdownOptions>
+                    {locations? locations.map((location) => 
+                        (<DropdownOption>{location.name}</DropdownOption>)
+                    ): (<DropdownOption>no locations</DropdownOption>)}
+                </DropdownOptions>
             </DropdownContext.Provider>
 
         </>
