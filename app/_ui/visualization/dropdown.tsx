@@ -4,9 +4,9 @@ import { useContext, createContext, useState } from 'react';
 
 const DropdownContext = createContext(false);
 
-function DropdownButton({children, handleClick}) {
+function DropdownButton({children, updateView}) {
     return (
-        <button onClick={handleClick} className="bg-transparent hover:bg-grey-500 text-grey-700 font-semibold hover:text-white py-2 px-4 border border-grey-500 hover:border-transparent rounded">
+        <button onClick={updateView} className="bg-transparent hover:bg-grey-500 text-grey-700 font-semibold hover:text-white py-2 px-4 border border-grey-500 hover:border-transparent rounded">
             <DropdownContext.Provider value={false}>
                 {children}
             </DropdownContext.Provider>
@@ -22,9 +22,9 @@ function DropdownOptions({children}) {
     )
 }
 
-function DropdownOption({children}) {
+function DropdownOption({children, updateSelection}) {
     return(
-        <div>{children}</div>
+        <div onClick={updateSelection}>{children}</div>
     )
 }
 
@@ -40,19 +40,24 @@ export default function Dropdown() {
     const [isActive, setIsActive] = useState(false);
     const [currentSelection, setCurrentSelection] = useState(locations[0]);
 
-    function handleClick(){
+    function updateView(){
         // update the DropdownContext to true
         setIsActive(!isActive);
     }
 
+    function updateSelection(){
+        setCurrentSelection(locations[1]);
+        updateView();
+    }
+
     return(
         <>
-            <DropdownButton handleClick={handleClick}>{currentSelection.name}</DropdownButton>
+            <DropdownButton updateView={updateView}>{currentSelection.name}</DropdownButton>
             <DropdownContext.Provider value={isActive}>
                 <DropdownOptions>
                     {locations? locations.map((location) => 
-                        (<DropdownOption>{location.name}</DropdownOption>)
-                    ): (<DropdownOption>no locations</DropdownOption>)}
+                        (<DropdownOption updateSelection={updateSelection}>{location.name}</DropdownOption>)
+                    ): (<DropdownOption updateSelection={updateSelection}>no locations</DropdownOption>)}
                 </DropdownOptions>
             </DropdownContext.Provider>
 
