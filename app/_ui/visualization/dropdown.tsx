@@ -53,16 +53,24 @@ export default function Dropdown() {
         setIsActive(!isActive);
     }
 
+    function updateParams(term) {
+        const params = new URLSearchParams(searchParams);
+        if(term){
+            params.set(param, term)
+        } else{
+            params.delete(param);
+        }
+        replace(`${pathname}?${params.toString()}`);
+    }
+
     const updateSelection = useDebouncedCallback((id) => {
         const location = locations.filter((location) => location.id === id)[0];
         setCurrentSelection(location.name);
+        updateParams(location.name);
         updateView();
     }, 10);
     
-    function updateRoute(){
-        const params = new URLSearchParams(searchParams);
-        params.set(param, currentSelection)
-    }
+
     return(
         <>
             <DropdownButton updateView={updateView}>{currentSelection}</DropdownButton>
