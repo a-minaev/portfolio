@@ -38,8 +38,7 @@ const locations = [
     {id: 5, name: 'Green Bay'}
 ];
 
-export default function Dropdown() {
-    const param = 'location';
+export default function Dropdown({ param } : { param : string }) {
 
     const searchParams = useSearchParams();
     const pathname = usePathname();

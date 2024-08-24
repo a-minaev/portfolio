@@ -12,7 +12,7 @@ export default function Page() {
               <h1> This is the 'visualization' page.</h1>
             </div>
             <div>
-              <Dropdown />
+              <Dropdown param='location'/>
             </div>
         </div>
     )
