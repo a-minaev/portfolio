@@ -13,6 +13,8 @@ export default function Page() {
             </div>
             <div>
               <Dropdown param='location'/>
+              <Dropdown param='start_date'/>
+              <Dropdown param='end_date'/>
             </div>
         </div>
     )
